@@ -11,10 +11,10 @@ include 'headers.php'
 
     <h2 style="color:black; margin:0;margin-bottom:.5em;text-align:center;font-size:40px;padding:1em;">Welcome Guest</h2>
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <h5 class="modal-title h2" id="loginModalLabel">Login</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
