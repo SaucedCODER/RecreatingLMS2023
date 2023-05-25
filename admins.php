@@ -437,7 +437,7 @@ include 'headers.php'
 </style>
 
 
-<div class="userid" data-userid='<?php echo $adminid ?>'></div>
+<div class="userid" data-userid='<?php echo 'hahahaha' . $adminid ?>'></div>
 
 <nav>
     <?php
@@ -949,7 +949,7 @@ include 'headers.php'
 
 
     //show all in manage book
-    xttpreq("methods2/managebooks.php", "", managebook);
+    xttpreq("methods2/managebooks.php", managebook);
 
 
     //add manage book 
@@ -1100,8 +1100,8 @@ include 'headers.php'
     function approve(e) {
         const id = e.currentTarget.dataset.userid;
         let userid = `useridapprove=${id}`;
-        xttpreq("methods2/approverejectreg.php", userid, "alert").then(res=>{
-            
+        xttpreq("methods2/approverejectreg.php", userid, "alert").then(res => {
+
         });
 
         setTimeout(() => {

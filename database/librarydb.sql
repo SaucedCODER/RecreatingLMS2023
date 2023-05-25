@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2023 at 02:06 AM
+-- Generation Time: May 25, 2023 at 01:11 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -40,7 +40,7 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`user_id`, `username`, `password`, `type`, `status`) VALUES
-(1, '190000', '123', 'ADMIN', 0);
+(190000, '190000', '123', 'ADMIN', 0);
 
 -- --------------------------------------------------------
 
@@ -133,6 +133,15 @@ CREATE TABLE `cart` (
   `book_title` varchar(45) DEFAULT NULL,
   `reserve_date` datetime(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `ISBN`, `book_title`, `reserve_date`) VALUES
+(52, 1, '0-0240774-1-0', 'A Brief Course in Qbasic With an Introduction', NULL),
+(53, 1, '0-0231424-7-2', '8086/8088, 80286, 80386, And 80486 Assembly L', NULL),
+(54, 1, '0-0301301-8-2', 'A Beginner', NULL);
 
 -- --------------------------------------------------------
 
@@ -286,6 +295,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `Fname`, `Lname`, `ResAdrs`, `OfcAdrs`, `LandlineNo`, `MobileNo`, `Email`, `Gender`) VALUES
+(190000, 'admin', '01', '[value-4]', '[value-5]', 0, 0, '[value-8]', '[value-9]');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -375,7 +391,7 @@ ALTER TABLE `borrowtran`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `reserve_record`
@@ -399,7 +415,7 @@ ALTER TABLE `transaction_history`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190001;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
