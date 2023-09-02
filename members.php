@@ -1,68 +1,7 @@
 <?php
-
-session_start();
-$userid = $_SESSION['userid'] = $_GET["userid"];
-$username = $_SESSION['username'] = $_GET["username"];
-
-if (!isset($_SESSION['userid'])) {
-
-    header('location: home.php');
-}
-
-unset($_SESSION['message']);
-
+include './partials/header.php'
 ?>
-<div class="userid" data-userid='<?php echo $userid ?>'></div>
-<?= include('headers.php'); ?>
-<load class="containerloader">
-    <div class='loader'>
-        <div class="loaditem"></div>
-        <div class="loaditem"></div>
-        <div class="loaditem"></div>
-        <div class="loaditem"></div>
-        <div class="loaditem"></div>
-    </div>
-</load>
-
 <style>
-    * {
-
-        font-family: sans-serif;
-    }
-
-    .btncatactive {
-        background: black;
-        color: white;
-    }
-
-    body {
-        margin: 0;
-        scroll-behavior: smooth;
-        background: #eee;
-    }
-
-    main {
-        width: 75vw;
-        height: auto;
-        margin: 1em auto;
-        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-        position: relative;
-
-    }
-
-    section {
-        width: 100%;
-        height: auto;
-        padding-top: 2em;
-        position: absolute;
-        top: 0;
-        border-radius: 10px;
-        color: white;
-        display: none;
-        box-shadow: lightgray 0px 2px 10px;
-        margin-top: 4rem;
-    }
-
     .transaction-record {
         background-color: whitesmoke;
         color: #333;
@@ -72,77 +11,6 @@ unset($_SESSION['message']);
         max-height: auto;
         padding: 2em;
         display: none;
-    }
-
-    .search-reserve {
-        min-height: 80vh;
-        max-height: auto;
-        background: whitesmoke;
-
-
-
-    }
-
-    .container-4categories {
-        display: flex;
-        padding: .2em;
-        border: 1px solid white;
-        width: 98%;
-        margin: auto;
-    }
-
-
-    main .active {
-        display: block;
-
-        z-index: 99;
-    }
-
-    .books-collection {
-        margin: 2em;
-        padding: 1em;
-        grid-column: 1 / 3;
-
-
-    }
-
-    .main-containerofitems {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        grid-gap: 1em;
-        font-size: 12px;
-        width: 100%;
-        color: black;
-        justify-content: space-around;
-
-    }
-
-    .item-container {
-        border: 1px solid lightblue;
-        background: rgba(0, 0, 0, 0.9);
-        width: 100%;
-        padding: .2em;
-        cursor: pointer;
-        background: #eee;
-        box-shadow: 0 8px 8px -4px lightblue;
-    }
-
-    .item-container .img {
-
-        background: rgba(0, 0, 0, 0.7);
-        width: 100%;
-        height: 140px;
-        transition: 1s ease;
-
-    }
-
-    .item-container span {
-        display: block;
-    }
-
-    .item-container:hover {
-        background: linear-gradient(to left bottom, #e5fb53, #beff91, #acffc5, #b7ffe8, #daf9f6);
-        color: #111;
     }
 
     nav {
@@ -200,15 +68,9 @@ unset($_SESSION['message']);
         transform: scale(1);
     }
 
-    @media only screen and (max-width: 600px) {
-
-        .main-containerofitems {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-gap: 1em;
-
-
-        }
+    main .active {
+        display: block;
+        z-index: 99;
     }
 
     .e-cart {
@@ -328,7 +190,6 @@ unset($_SESSION['message']);
         padding: .2em;
         box-sizing: border-box;
         color: white;
-        font-weight: bold;
         align-items: center;
         gap: 3px;
         transition: all 150ms;
@@ -355,10 +216,12 @@ unset($_SESSION['message']);
 </style>
 
 
+<div class="userid" data-userid='<?php echo $UID ?>'></div>
+
 <nav>
     <?php
     include "connection/oopconnection.php";
-    $sqll = "SELECT * FROM users where user_id = $userid";
+    $sqll = "SELECT * FROM users where user_id = $UID";
     $res = $conn->query($sqll) or die($conn->error);
     $rowww = $res->fetch_assoc();
 
@@ -378,7 +241,7 @@ unset($_SESSION['message']);
     <div class="Yaccount">
         my account
     </div>
-    <a href="logout.php?userid=<?php echo $userid ?>">Logout</a>
+    <a href="logout.php?userid=<?php echo $UID ?>">Logout</a>
 </nav>
 
 
@@ -392,7 +255,7 @@ unset($_SESSION['message']);
         </div>
         <h1 class="cartno" style="padding:1em 0em;padding-left:2em; margin:0;">BOOK COLLECTION</h1>
         <div class="filtercontainer">
-            <?php include 'ajax.php'; ?>
+            <?php include './partials/Filterform.php'; ?>
             <!-- search field -->
         </div>
         <div class="container-4categories"></div>
@@ -675,9 +538,12 @@ unset($_SESSION['message']);
         if (input.files && input.files[0]) {
             let reader = new FileReader();
             reader.onload = function(er) {
+
                 document.querySelector("#chimg").src = er.target.result;
 
+
             };
+
             reader.readAsDataURL(input.files[0]);
         }
     }
@@ -690,6 +556,7 @@ unset($_SESSION['message']);
             spass.type = "password";
         }
     }
+    //class="userid"
     const userid = document.querySelector(".userid").dataset.userid;
     //load window
     window.addEventListener("load", () => {
@@ -796,8 +663,8 @@ unset($_SESSION['message']);
                 const res = xml.responseText;
                 console.log(res);
                 alert(res);
-                xttpreq("methods/showaccount.php", "useridshowdetails=<?= $userid ?>", containeruserdetails)
-                xttpreq("methods/showaccount.php", "userid=<?= $userid ?>", Yaccount)
+                xttpreq("methods/showaccount.php", "useridshowdetails=<?= $UID ?>", containeruserdetails)
+                xttpreq("methods/showaccount.php", "userid=<?= $UID ?>", Yaccount)
 
             } else {
                 console.log("failed");
@@ -826,8 +693,8 @@ unset($_SESSION['message']);
 
                     const res = xhr.responseText;
 
-                    xttpreq("methods/showaccount.php", "useridshowdetails=<?= $userid ?>", containeruserdetails)
-                    xttpreq("methods/showaccount.php", "userid=<?= $userid ?>", Yaccount)
+                    xttpreq("methods/showaccount.php", "useridshowdetails=<?= $UID ?>", containeruserdetails)
+                    xttpreq("methods/showaccount.php", "userid=<?= $UID ?>", Yaccount)
 
                 } else {
                     console.log("failed");
@@ -857,7 +724,7 @@ unset($_SESSION['message']);
             }
 
         }
-        xhr.send(`useriduserupdate=<?= $userid ?>`);
+        xhr.send(`useriduserupdate=<?= $UID ?>`);
 
 
     }
@@ -872,10 +739,10 @@ unset($_SESSION['message']);
         containermyacc.classList.remove("showmodalmyacc");
     }
     // show account details
-    xttpreq("methods/showaccount.php", "useridshowdetails=<?= $userid ?>", containeruserdetails)
+    xttpreq("methods/showaccount.php", "useridshowdetails=<?= $UID ?>", containeruserdetails)
 
     // show account profile pic & username
-    xttpreq("methods/showaccount.php", "userid=<?= $userid ?>", Yaccount)
+    xttpreq("methods/showaccount.php", "userid=<?= $UID ?>", Yaccount)
 
     //function xttprequest 
     function xttpreq(phpfilename, send, output) {
@@ -905,6 +772,11 @@ unset($_SESSION['message']);
         xhr.send(send);
 
     }
+
+
+
+
+
     //SEARCH AREA
     const tracat = document.querySelector(".trackcat");
     const select = document.querySelector("#select");

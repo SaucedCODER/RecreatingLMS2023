@@ -10,23 +10,24 @@ function fetch_data()
   $stmt = $conn->prepare($query);
   $stmt->execute();
   $rows = $stmt->get_result();
-  if ($rows->num_rows) {
+  if($rows->num_rows){
     while ($data = $rows->fetch_assoc()) {
       $arraydata[] = $data;
     }
     return $arraydata;
-  } else {
-    return 0;
+  }else{
+return 0;
   }
-
+ 
 
   $stmt->close();
   $conn->close();
 }
+
 $fetchData = fetch_data();
-if ($fetchData) {
-  echo show_data($fetchData);
-} else {
+if($fetchData){
+echo show_data($fetchData);
+}else{
   echo "no books found!";
 }
 
@@ -46,42 +47,45 @@ function show_data($fetchData)
       } else {
         $avail = "Not Availble";
       }
-      $isbnn = $data['ISBN'];
+       $isbnn= $data['ISBN'];
       $sqlImg = "SELECT * FROM book_image where ISBN = '$isbnn'";
       $resultImg = $conn->query($sqlImg);
       $rowImg = $resultImg->fetch_assoc();
-      echo "<div style='display:flex;flex-direction:column;' onclick='viewbookev(event)' class='item-container' data-bookuniq='" . $data['ISBN'] . "'>";
+      echo "<div style='display:flex;flex-direction:column;' onclick='viewbookev(event)' class='item-container' data-bookuniq='".$data['ISBN']."'>";
 
-      if ($rowImg['status'] == 0) {
-        $filename = "../booksimg/book" . $data['ISBN'] . "*";
-        $fileInfo = glob($filename);
-        $fileext = explode(".", $fileInfo[0]);
-
-        $fileActualExt1 = strtolower(end($fileext));
-        echo "<img class='img' loading='lazy'src='booksimg/book" . $data['ISBN'] . ".$fileActualExt1?" . mt_rand() . "'" . $data['ISBN'] . "'>
+            if ($rowImg['status'] == 0) {
+                $filename = "../booksimg/book".$data['ISBN']."*";
+               $fileInfo = glob($filename);
+               $fileext = explode(".", $fileInfo[0]);
+               
+               $fileActualExt1 = strtolower(end($fileext));
+               echo "<img class='img' src='booksimg/book".$data['ISBN'].".$fileActualExt1?".mt_rand()."'". $data['ISBN']."'>
                ";
-      } else {
-        echo "<img src='booksimg/bookdefault.png' loading='lazy' class='img'data-bookinfo = '" . $data['ISBN'] . "'>
+            }
+            else {
+               echo "<img src='booksimg/bookdefault.png' class='img'data-bookinfo = '". $data['ISBN']."'>
                ";
-      }
+           
+            }
 
-
+  
       echo "
      
-      <span style='font-weight:bold;'>Title :" . $data['title'] . "</span>
+      <span style='font-weight:bold;'>Title :".$data['title']."</span>
       <span>ISBN :" . $data['ISBN'] . "</span>
-      <span>Author :" . $data['author'] . "</span>
+      <span>Author :".$data['author']."</span>
       <div class='desc'>
           <p>
       Description:
-           <p>" . $data['abstract'] . "</p>
+           <p>".$data['abstract']."</p>
           </p>
           <div>.$avail.</div>
           </div>
  
  
-          <button id='addcartbtn' data-isbn='" . $data['ISBN'] . "'>Add TO CART</button>
+          <button id='addcartbtn' data-isbn='".$data['ISBN']."'>Add TO CART</button>
       </div>";
+    
     }
     $conn->close();
   } else {
@@ -92,4 +96,6 @@ function show_data($fetchData)
   }
 
   echo "</div>";
+
 }
+

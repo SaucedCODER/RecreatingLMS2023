@@ -1,0 +1,87 @@
+.search-reserve {
+    max-width: 900px;
+    margin: 0;
+    background: whitesmoke;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    background: rgba(0, 0, 0, 0.0);
+}
+
+.books-collection {
+    margin: 2em;
+    padding: 1em;
+    grid-column: 1 / 3;
+}
+#addcartbtn{
+    display: flex;
+    justify-self: flex-end !important;
+}
+.main-containerofitems {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    /* Adjust the minimum width as needed */
+    grid-gap: 1em;
+    font-size: 12px;
+    width: 100%;
+    color: black;
+    justify-content: space-around;
+}
+
+.item-container {
+    border: 1px solid grey;
+
+    width: 100%;
+    padding: .2em;
+    background: #eee;
+    box-shadow: 0 8px 8px -4px lightblue;
+    transition: 1s ease;
+    cursor: pointer;
+}
+
+.item-container .img {
+    width: 100%;
+    height: 140px;
+
+}
+
+.item-container span {
+    display: block;
+}
+
+.item-container:hover {
+    background: linear-gradient(to left bottom, #e5fb53, #beff91, #acffc5, #b7ffe8, #daf9f6);
+    color: #111;
+}
+
+.cartno {
+    grid-column: 1 / 3;
+    background: black;
+    /* color: rgb(161, 0, 9); */
+    color: #eee;
+    border-top: 5px solid lightblue;
+}
+button {
+    padding: .6em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 3px 1px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: whitesmoke;
+    color: black;
+    border: 2px solid lightblue;
+}
+
+button:hover {
+    background-color: lightblue;
+    color: black;
+}
+
+
+.container-4categories {
+    margin-left: .4em;
+}
+
+
+

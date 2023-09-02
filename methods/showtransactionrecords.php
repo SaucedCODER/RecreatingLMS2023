@@ -54,7 +54,7 @@ echo "
 
         <td>".$rows['DateBorrowed']."</td>
         <td>".$rows['Status']."</td>
-        <td><a href='#'  onclick='viewbookev(event)' style='color:green;border:none;background:none;box-shadow:none;font-weight:bold;' class='item-container' data-bookuniq='".$rows['ISBN']."'>view</a></td></td>
+        <td><a href='#'>view</a></td></td>
         <td style='color:blue;'> ₱ ".$totalpenalty."</td>
  
      
